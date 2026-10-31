@@ -206,6 +206,7 @@ function App() {
         autoRaf: true,
         anchors: true,
         smoothWheel: !quiet,
+        respectReducedMotion: false,
         duration: quiet ? 0 : 1.05,
       }}
     >

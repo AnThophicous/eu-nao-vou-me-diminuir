@@ -131,11 +131,13 @@ test("system reduced motion does not override the full-motion default", async ({
   page,
 }) => {
   await page.emulateMedia({ reducedMotion: "reduce" });
-  await page.goto("/#ruptura");
+  await page.goto("/");
   await expect(page.locator("html")).toHaveAttribute("data-motion", "full");
   await expect(
     page.getByRole("button", { name: "Pausar movimento" }),
   ).toHaveAttribute("aria-pressed", "false");
+  await page.mouse.wheel(0, 500);
+  await expect(page.locator('html')).toHaveClass(/lenis-smooth/);
   await page.getByRole("button", { name: /SEGURE PARA ROMPER/ }).focus();
   await page.keyboard.press('Enter');
   await expect(page.locator("#ruptura")).toHaveClass(/is-released/);
